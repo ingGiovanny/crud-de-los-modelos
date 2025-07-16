@@ -1,0 +1,19 @@
+from django.urls import path
+from apl.views import *
+from apl.views.categoria.views import *
+
+app_name = 'apl'
+
+ # path('categoria/listar2/', lista_categoria, name='categoria_lista2'),
+ #
+ 
+urlpatterns = [
+    path('base/', base_html, name='base'),
+    path('plantilla/', plantilla_html, name='plantilla'),
+    path('listar/', AdministradorListView.as_view() , name='administrador_listar'),
+    path('administrador/crear/', AdministradorCreateView.as_view(), name='administrador_crear'),
+    path('administrador/editar/<int:pk>/', AdministradorUpdateView.as_view(), name='administrador_editar'),
+    path('administrador/eliminar/<int:pk>/', AdministradorDeleteView.as_view(), name='administrador_eliminar'),
+
+]
+

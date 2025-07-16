@@ -1,0 +1,87 @@
+from django import forms
+from django.views.generic import ListView, CreateView,UpdateView,DeleteView
+from apl.views.categoria.views import *
+#from apl.models import Categoria
+from apl.forms import AdministradorForm
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.utils.decorators import method_decorator
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.urls import reverse_lazy
+#from django.contrib.auth.decorators import login_required
+from apl.models import *
+
+def base_html(request):
+    data = {
+        'title': 'Base Template',
+        'message': 'Welcome to the base template of the application.'
+    }
+    return render(request, 'categoria/content.html', data)
+
+def plantilla_html(request):
+    data = {
+        'title': 'Plantilla HTML',
+        'message': 'This is a sample HTML template.'
+    }
+    return render(request, 'categoria/plantilla.html', data)
+
+#a qui es para que imprima la lista  de categorias en la vista
+class AdministradorListView(ListView):
+    model = Administrador
+    template_name = 'administrador/listar_administrador.html'
+    context_object_name = 'administradores'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        nombre = {'nombre': 'giovanny'}
+        return JsonResponse(nombre)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Lista de Administradores'
+        context['crear_ruta_url'] = reverse_lazy('apl:administrador_crear')
+        context['entidad'] = 'administrador'
+        context['administradores'] = Administrador.objects.all()
+        return context
+
+
+class AdministradorCreateView(CreateView):
+    model = Administrador
+    form_class = AdministradorForm
+    template_name = 'administrador/crear.html'
+    success_url = reverse_lazy('apl:administrador_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Crear Administrador'
+        return context
+
+
+class AdministradorUpdateView(UpdateView):
+    model = Administrador
+    form_class = AdministradorForm
+    template_name = 'administrador/crear.html'
+    success_url = reverse_lazy('apl:administrador_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Editar Administrador'
+        context['entidad'] = 'administradores'
+        context['listar_url'] = reverse_lazy('apl:administrador_listar')
+        return context
+
+
+class AdministradorDeleteView(DeleteView):
+    model = Administrador
+    template_name = 'administrador/eliminar.html'
+    success_url = reverse_lazy('apl:administrador_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Eliminar Administrador'
+        context['entidad'] = 'administradores'
+        context['listar_url'] = reverse_lazy('apl:administrador_listar')
+        return context
