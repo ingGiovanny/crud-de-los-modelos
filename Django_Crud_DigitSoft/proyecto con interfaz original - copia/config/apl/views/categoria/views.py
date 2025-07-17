@@ -121,18 +121,6 @@ class FacturacionCreateView(CreateView):
 class FacturacionUpdateView(UpdateView):
     model = Facturacion
     form_class = Facturacionform
-<<<<<<< HEAD
-    template_name = 'administrador/crear.html'
-    success_url = reverse_lazy('apl:administrador_listar')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['titulo'] = 'Editar Administrador'
-        context['entidad'] = 'administradores'
-        context['listar_url'] = reverse_lazy('apl:administrador_listar')
-        return context
-    
-=======
     template_name = 'facturacion/crear.html'
     success_url = reverse_lazy('apl:facturacion_listar')
 
@@ -154,4 +142,3 @@ class FacturacionDeleteView(DeleteView):
         context['entidad'] = 'facturaciones'
         context['listar_url'] = reverse_lazy('apl:facturacion_listar')
         return context    
->>>>>>> bc407992fb409d052f301d20c2a894c7e58bb89e

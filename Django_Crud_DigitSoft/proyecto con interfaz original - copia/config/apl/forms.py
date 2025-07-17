@@ -31,31 +31,18 @@ class AdministradorForm(ModelForm):
 class Facturacionform(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-<<<<<<< HEAD
-        self.fields['nombre'].widget.attrs['autofocus'] = True
-=======
         self.fields['fecha_id_venta'].widget.attrs['autofocus'] = True
->>>>>>> bc407992fb409d052f301d20c2a894c7e58bb89e
         
     class Meta:
         model = Facturacion
         fields = '__all__'
         widgets = {
-<<<<<<< HEAD
-            'nombre' : TextInput(
-                attrs={
-                    'placeholder' : 'Ingrese un nombre',
-                }
-            ),
-            'descripcion' : Textarea(
-=======
             'fecha_id_venta' : TextInput(
                 attrs={
                     'placeholder' : 'Ingrese fecha en formato DD/MM/AAAA',
                 }
             ),
             'descripcion_venta' : Textarea(
->>>>>>> bc407992fb409d052f301d20c2a894c7e58bb89e
                attrs={
                   'placeholder' : 'Ingrese una descripción',
                   'rows': 3,
