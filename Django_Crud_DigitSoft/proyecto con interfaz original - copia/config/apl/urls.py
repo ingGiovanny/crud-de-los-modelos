@@ -19,6 +19,12 @@ urlpatterns = [
     path('factuacion/crear/', FacturacionCreateView.as_view(), name='facturacion_crear'),
     path('facturacion/editar/<int:pk>/', FacturacionUpdateView.as_view(), name='facturacion_editar'),
     path('facturacion/eliminar/<int:pk>/', FacturacionDeleteView.as_view(), name='facturacion_eliminar'),
+    #url de ventas
+    path('ventas/listar/', ventasListview.as_view() , name='ventas_listar'),
+    path('ventas/crear/', ventasCreateView.as_view(), name='ventas_crear'),
+    path('ventas/editar/<int:pk>/', ventasUpdateView.as_view(), name='ventas_editar'),
+    path('ventas/eliminar/<int:pk>/', ventasDeleteView.as_view(), name='ventas_eliminar'),
+    
 
 ]
 

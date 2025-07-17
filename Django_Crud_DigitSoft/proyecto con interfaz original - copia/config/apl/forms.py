@@ -50,3 +50,28 @@ class Facturacionform(ModelForm):
                 }
             ),
         }
+        
+
+class ventasform(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['valor_venta'].widget.attrs['autofocus'] = True
+
+    class Meta:
+        model = Ventas
+        fields = '__all__'
+        widgets = {
+            'cliente_id_cliente': Select(
+                attrs={
+                    'placeholder': 'Seleccione el cliente',
+                    'class': 'form-control',
+                }
+            ),
+            'cantidad_vendidas': Textarea(
+                attrs={
+                    'placeholder': 'Ingrese la cantidad vendida',
+                    'rows': 3,
+                    'cols': 4,
+                }
+            ),
+        }

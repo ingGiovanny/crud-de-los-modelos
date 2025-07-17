@@ -89,4 +89,4 @@ class Ventas(models.Model):
     id_venta = models.AutoField(primary_key=True)
     cliente_id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_id_cliente', blank=True, null=True)
     cantidad_vendidas = models.IntegerField(blank=True, null=True)
-    valor_venta = models.DecimalField(max_digits=10, decimal_places=2)
+    valor_venta = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
