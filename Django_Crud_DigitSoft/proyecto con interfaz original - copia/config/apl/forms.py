@@ -1,5 +1,5 @@
 from django.forms import *
-from .models import Administrador
+from .models import *
 
 class AdministradorForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -11,6 +11,30 @@ class AdministradorForm(ModelForm):
         
     class Meta:
         model = Administrador
+        fields = '__all__'
+        widgets = {
+            'nombre' : TextInput(
+                attrs={
+                    'placeholder' : 'Ingrese un nombre',
+                }
+            ),
+            'descripcion' : Textarea(
+               attrs={
+                  'placeholder' : 'Ingrese una descripción',
+                  'rows': 3,
+                  'cols': 40,
+                }
+            ),
+        }
+        
+        
+class Facturacionform(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['nombre'].widget.attrs['autofocus'] = True
+        
+    class Meta:
+        model = Facturacion
         fields = '__all__'
         widgets = {
             'nombre' : TextInput(
