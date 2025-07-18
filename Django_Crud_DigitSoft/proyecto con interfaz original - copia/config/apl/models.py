@@ -8,7 +8,7 @@ class Administrador(models.Model):
     contraseña = models.CharField(max_length=42, blank=True, null=True)
     correo_electronico = models.CharField(max_length=45, blank=True, null=True)
 
-class Cliente(models.Model):
+class Clientes(models.Model):
     id_cliente = models.AutoField(primary_key=True)
     numero_documento = models.CharField(max_length=70)
     numero_telefonico = models.CharField(max_length=20)
@@ -28,7 +28,7 @@ class Equipo(models.Model):
     id_equipo = models.AutoField(primary_key=True)
     modelo = models.CharField(max_length=30, blank=True, null=True)
     clave = models.CharField(max_length=35, blank=True, null=True)
-    cliente_id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_id_cliente', blank=True, null=True)
+    cliente_id_cliente = models.ForeignKey(Clientes, models.DO_NOTHING, db_column='cliente_id_cliente', blank=True, null=True)
 
 class Facturacion(models.Model):
     id_recibo = models.AutoField(primary_key=True)
@@ -49,7 +49,7 @@ class Marca(models.Model):
 
 class Orden_servicio(models.Model):
     id_orden_servicio = models.AutoField(primary_key=True)
-    cliente_id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_id_cliente', blank=True, null=True)
+    cliente_id_cliente = models.ForeignKey(Clientes, models.DO_NOTHING, db_column='cliente_id_cliente', blank=True, null=True)
     marca_id = models.ForeignKey(Marca, models.DO_NOTHING, db_column='marca_id', blank=True, null=True)
     tecnicos_id_tecnico = models.ForeignKey('Tecnicos', models.DO_NOTHING, db_column='tecnicos_id_tecnico', blank=True, null=True)
     descripcion_orden = models.CharField(max_length=50, blank=True, null=True)
@@ -72,7 +72,7 @@ class Proveedor(models.Model):
 
 class ServicioTecnico(models.Model):
     id_servicio_tecnico = models.AutoField(primary_key=True)
-    cliente_id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_id_cliente', blank=True, null=True)
+    cliente_id_cliente = models.ForeignKey(Clientes, models.DO_NOTHING, db_column='cliente_id_cliente', blank=True, null=True)
     tecnicos_id_tecnico = models.ForeignKey('Tecnicos', models.DO_NOTHING, db_column='tecnicos_id_tecnico', blank=True, null=True)
     orden_servicio_id_orden_servicio = models.ForeignKey(Orden_servicio, models.DO_NOTHING, db_column='orden_servicio_id_ordenServicio', blank=True, null=True)
 
@@ -87,6 +87,6 @@ class Tecnicos(models.Model):
 
 class Ventas(models.Model):
     id_venta = models.AutoField(primary_key=True)
-    cliente_id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_id_cliente', blank=True, null=True)
+    cliente_id_cliente = models.ForeignKey(Clientes, models.DO_NOTHING, db_column='cliente_id_cliente', blank=True, null=True)
     cantidad_vendidas = models.IntegerField(blank=True, null=True)
     valor_venta = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)

@@ -1,8 +1,9 @@
 from django import forms
 from django.views.generic import ListView, CreateView,UpdateView,DeleteView
 from apl.views.categoria.views import *
+
 #from apl.models import Categoria
-from apl.forms import *
+from apl.forms import Clientesform, AdministradorForm, Facturacionform, ventasform
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
@@ -26,7 +27,7 @@ def plantilla_html(request):
     return render(request, 'categoria/plantilla.html', data)
 
 # a qui estan todas las vistas que hacen que el modulo de asdministradores funcione
-# las vistas son las que se encargan de manejar las peticiones y respuestas del usuario
+# las vistas de administrador
 class AdministradorListView(ListView):
     model = Administrador
     template_name = 'administrador/listar_administrador.html'
@@ -147,7 +148,6 @@ class FacturacionDeleteView(DeleteView):
 # a qui estan las vistas de ventas
 
 
-
 class ventasListview(ListView):
     model = Ventas
     template_name = 'ventas/listar_ventas.html'
@@ -166,7 +166,7 @@ class ventasListview(ListView):
         context['titulo'] = 'Lista de Ventas'
         context['crear_ruta_url'] = reverse_lazy('apl:ventas_crear')
         context['entidad'] = 'ventas'
-        context['ventas'] = Ventas.objects.all()
+        context['venta'] = Ventas.objects.all()
         return context
     
 class ventasCreateView(CreateView):
@@ -204,3 +204,65 @@ class ventasDeleteView(DeleteView):
         context['entidad'] = 'ventas'
         context['listar_url'] = reverse_lazy('apl:ventas_listar')
         return context   
+    #--------------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------
+#aquí estan las vistas de clientes
+class clientesListview(ListView):
+    model =Clientes
+    template_name = 'clientes/listar_clientes.html'
+    context_object_name = 'clientes'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        nombre = {'nombre': 'adriana'}
+        return JsonResponse(nombre)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Lista de clientes'
+        context['crear_ruta_url'] = reverse_lazy('apl:clientes_crear')
+        context['entidad'] = 'clientes'
+        context['clientes'] = Clientes.objects.all()
+        return context
+    
+class clientesCreateView(CreateView):
+    model = Clientes
+    form_class = Clientesform
+    template_name = 'clientes/crear.html'
+    success_url = reverse_lazy('apl:clientes_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Crear clientes'
+        return context
+    
+class clientesUpdateView(UpdateView):
+    model = Clientes
+    form_class = Clientesform
+    template_name = 'clientes/crear.html'
+    success_url = reverse_lazy('apl:clientes_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Editar clientes'
+        context['entidad'] = 'clientes'
+        context['listar_url'] = reverse_lazy('apl:clientes_listar')
+        return context
+    
+class clientesDeleteView(DeleteView):
+    model = Clientes
+    template_name = 'clientes/eliminar.html'
+    success_url = reverse_lazy('apl:clientes_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Eliminar clientes'
+        context['entidad'] = 'clientes'
+        context['listar_url'] = reverse_lazy('apl:clientes_listar')
+        return context 
+    #--------------------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------
+# aqui estan las vistas de compras

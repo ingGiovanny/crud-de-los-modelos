@@ -1,0 +1,88 @@
+{% extends "categoria/plantilla.html" %}
+{%load static%}
+{%block content%}
+  <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+     <br>
+   <br>
+   <br>
+        
+
+
+<div class="col-md-12">
+
+            <div class="card card-default">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  DIGITSOFT S.A.S.
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">GESTION DE CLIENTES</h3>
+       
+                
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+
+              <!--aqui va la tablaa-->
+  <div class="col-sm-12">
+    <table id="tabla_productos" class="table table-bordered table-hover dataTable dtr-inline">
+      <thead>
+ 
+        <tr>
+          <th>ID CLIENTE</th>
+          <th>NUMERO DE DOCUMENTO</th>
+          <th>NUMERO TELEFONICO</th>
+          <th>CORREO ELECTRONICO</th>
+          <th>DIRECCION</th>
+        </tr>
+      </thead>
+    <tbody>
+  {% for c in object_list %}
+  <tr>
+    <td>{{ c.id_cliente }}</td>
+    <td>{{ c.numero_documento }}</td>
+    <td>{{ c.numero_telefono }}</td>
+    <td>{{ c.correo_electronico }}</td>
+    <td>{{ c.direccion }}</td
+    <!-- Aquí se agregan los botones de editar y eliminar -->
+      <td>
+      <a href="{% url 'apl:clientes_editar' c.id_cliente %}" class="btn btn-primary btn-xs">
+        <i class="fas fa-edit"></i>
+      </a>
+      <a href="{% url 'apl:clientes_eliminar' c.id_cliente %}" class="btn btn-danger btn-xs">
+        <i class="fas fa-trash"></i>
+      </a>
+    </td>
+  </tr>
+  {% endfor %}
+</tbody>
+
+       
+  
+     
+    </table>
+     <div class="card-footer">
+        <a href="{{crear_ruta_url}}" class="btn btn-primary btn btn-xs"><i class="fas fa-edit"></i>Agregar</a>
+      </div>
+  </div>
+</div>
+<script>
+        $(document).ready(function () {
+      $('#tabla_productos').DataTable();
+      });
+    </script>
+  
+{%endblock%}
+
