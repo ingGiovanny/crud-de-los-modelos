@@ -49,20 +49,20 @@
         </tr>
       </thead>
     <tbody>
-  {% for c in object_list %}
+  {% for c in producto %}
   <tr>
     <td>{{ c.nombre_producto }}</td>
     <td>{{ c.modelo_producto }}</td>
-    <td>{{ c.cantidad_producto }}</td>
+    <td>{{ c.cantidad }}</td>
     <td>{{ c.color_producto }}</td>
     <td>{{ c.tipo }}</td>
     <td>{{ c.marca_id }}</td>
     <!-- Aquí se agregan los botones de editar y eliminar -->
       <td>
-      <a href="{% url 'apl:producto_editar' c.nombre_producto %}" class="btn btn-primary btn-xs">
+<a href="{% url 'apl:producto_editar' c.id %}" class="btn btn-primary btn-xs">
         <i class="fas fa-edit"></i>
       </a>
-      <a href="{% url 'apl:producto_eliminar' c.nombre_producto %}" class="btn btn-danger btn-xs">
+<a href="{% url 'apl:producto_eliminar' c.id %}" class="btn btn-danger btn-xs">
         <i class="fas fa-trash"></i>
       </a>
     </td>
@@ -72,7 +72,7 @@
 
     </table>
      <div class="card-footer">
-        <a href="{{crear_ruta_url}}" class="btn btn-primary btn btn-xs"><i class="fas fa-edit"></i>Agregar</a>
+<a href="{% url 'apl:producto_listar' %}" class="btn btn-primary btn btn-xs"><i class="fas fa-edit"></i>Agregar</a>
       </div>
   </div>
 </div>

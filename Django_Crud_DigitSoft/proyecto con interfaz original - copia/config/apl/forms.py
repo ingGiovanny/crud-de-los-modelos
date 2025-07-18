@@ -110,7 +110,7 @@ class garantiasform(ModelForm):
         model = Garantias
         fields = '__all__'
         widgets = {
-            'facturacion_id_recibo': Select(
+            'facturacion_id_recibo': TextInput(
                 attrs={
                     'placeholder': 'Seleccione el recibo',
                     'class': 'form-control',
@@ -134,9 +134,9 @@ class productoform(ModelForm):
         model = Producto
         fields = '__all__'
         widgets = {
-            'modelo_producto': Select(
+            'modelo_producto': TextInput(
                 attrs={
-                    'placeholder': 'Seleccione el modelo',
+                    'placeholder': 'escriba el modelo',
                     'class': 'form-control',
                 }
             ),
@@ -152,23 +152,9 @@ class productoform(ModelForm):
 class marcaform(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['modelo_marca'].widget.attrs['autofocus'] = True
+        if 'marca' in self.fields:
+            self.fields['marca'].widget.attrs['autofocus'] = True  # Ejemplo con 'marca'
 
     class Meta:
         model = Marca
         fields = '__all__'
-        widgets = {
-            'modelo_marca': Select(
-                attrs={
-                    'placeholder': 'Seleccione el modelo',
-                    'class': 'form-control',
-                }
-            ),
-            'cantidad_marca': Textarea(
-                attrs={
-                    'placeholder': 'Ingrese la cantidad de marcas',
-                    'rows': 3,
-                    'cols': 4,
-                }
-            ),
-        }        

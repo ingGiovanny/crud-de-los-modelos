@@ -47,7 +47,7 @@
         </tr>
       </thead>
     <tbody>
-  {% for c in object_list %}
+  {% for c in marcas %}
   <tr>
 
     <td>{{ c.id_marca }}</td>
@@ -69,7 +69,7 @@
 
     </table>
      <div class="card-footer">
-        <a href="{{crear_ruta_url}}" class="btn btn-primary btn btn-xs"><i class="fas fa-edit"></i>Agregar</a>
+<a href="{% url 'apl:marca_listar' %}" class="btn btn-primary btn btn-xs"><i class="fas fa-edit"></i>Agregar</a>
       </div>
   </div>
 </div>

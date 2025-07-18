@@ -1,6 +1,9 @@
 from django.urls import path
 from apl.views import *
 from apl.views.categoria.views import *
+from apl.views.marca.views import *
+from apl.views.garantias.views import *
+from apl.views.producto.views import *
 
 app_name = 'apl'
 

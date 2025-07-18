@@ -47,6 +47,9 @@ class Marca(models.Model):
     marca = models.CharField(max_length=35)
     descripcion = models.CharField(max_length=80)
 
+    def __str__(self):
+        return self.marca
+
 class Orden_servicio(models.Model):
     id_orden_servicio = models.AutoField(primary_key=True)
     cliente_id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_id_cliente', blank=True, null=True)
