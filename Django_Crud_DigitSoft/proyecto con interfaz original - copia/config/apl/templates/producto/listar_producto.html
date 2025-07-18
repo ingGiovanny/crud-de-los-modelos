@@ -1,0 +1,86 @@
+{% extends "categoria/plantilla.html" %}
+{%load static%}
+{%block content%}
+  <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+     <br>
+   <br>
+   <br>
+        
+
+
+<div class="col-md-12">
+
+            <div class="card card-default">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-exclamation-triangle"></i>
+         SOMOS DIGIT SOFT
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">GESTION PRODUCTOS</h3>
+
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+
+              <!--aqui va la tablaa-->
+  <div class="col-sm-12">
+    <table id="tabla_productos" class="table table-bordered table-hover dataTable dtr-inline">
+      <thead>
+        <tr> 
+          <th>nombre_producto</th>
+          <th>modelo_producto</th>
+          <th>cantidad_producto</th>
+          <th>color_producto</th>
+          <th>tipo</th>
+          <th>marca_id</th>
+          <th>OPCIONES</th>
+        </tr>
+      </thead>
+    <tbody>
+  {% for c in object_list %}
+  <tr>
+    <td>{{ c.nombre_producto }}</td>
+    <td>{{ c.modelo_producto }}</td>
+    <td>{{ c.cantidad_producto }}</td>
+    <td>{{ c.color_producto }}</td>
+    <td>{{ c.tipo }}</td>
+    <td>{{ c.marca_id }}</td>
+    <!-- Aquí se agregan los botones de editar y eliminar -->
+      <td>
+      <a href="{% url 'apl:producto_editar' c.nombre_producto %}" class="btn btn-primary btn-xs">
+        <i class="fas fa-edit"></i>
+      </a>
+      <a href="{% url 'apl:producto_eliminar' c.nombre_producto %}" class="btn btn-danger btn-xs">
+        <i class="fas fa-trash"></i>
+      </a>
+    </td>
+  </tr>
+  {% endfor %}
+</tbody>
+
+    </table>
+     <div class="card-footer">
+        <a href="{{crear_ruta_url}}" class="btn btn-primary btn btn-xs"><i class="fas fa-edit"></i>Agregar</a>
+      </div>
+  </div>
+</div>
+<script>
+        $(document).ready(function () {
+      $('#tabla_productos').DataTable();
+      });
+    </script>
+  
+{%endblock%}
+

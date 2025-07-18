@@ -25,6 +25,22 @@ urlpatterns = [
     path('ventas/editar/<int:pk>/', ventasUpdateView.as_view(), name='ventas_editar'),
     path('ventas/eliminar/<int:pk>/', ventasDeleteView.as_view(), name='ventas_eliminar'),
     
+    #url de garantias
+    path('garantias/listar/', garantiasListview.as_view() , name='garantias_listar'),
+    path('garantias/crear/', garantiasCreateView.as_view(), name='garantias_crear'),
+    path('garantias/editar/<int:pk>/', garantiasUpdateView.as_view(), name='garantias_editar'),
+    path('garantias/eliminar/<int:pk>/', garantiasDeleteView.as_view(), name='garantias_eliminar'),
 
+    #url de productos
+    path('productos/listar/', productoListview.as_view() , name='producto_listar'),
+    path('productos/crear/', productoCreateView.as_view(), name='producto_crear'),
+    path('productos/editar/<int:pk>/', productoUpdateView.as_view(), name='producto_editar'),
+    path('productos/eliminar/<int:pk>/', productoDeleteView.as_view(), name='producto_eliminar'),
+
+    #url de marca
+    path('marca/listar/', marcaListview.as_view() , name='marca_listar'),
+    path('marca/crear/', marcaCreateView.as_view(), name='marca_crear'),
+    path('marca/editar/<int:pk>/', marcaUpdateView.as_view(), name='marca_editar'),
+    path('marca/eliminar/<int:pk>/', marcaDeleteView.as_view(), name='marca_eliminar'),
 ]
 

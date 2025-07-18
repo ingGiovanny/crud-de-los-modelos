@@ -75,3 +75,100 @@ class ventasform(ModelForm):
                 }
             ),
         }
+
+
+class ventasform(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['valor_venta'].widget.attrs['autofocus'] = True
+
+    class Meta:
+        model = Ventas
+        fields = '__all__'
+        widgets = {
+            'cliente_id_cliente': Select(
+                attrs={
+                    'placeholder': 'Seleccione el cliente',
+                    'class': 'form-control',
+                }
+            ),
+            'cantidad_vendidas': Textarea(
+                attrs={
+                    'placeholder': 'Ingrese la cantidad vendida',
+                    'rows': 3,
+                    'cols': 4,
+                }
+            ),
+        }
+
+class garantiasform(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['facturacion_id_recibo'].widget.attrs['autofocus'] = True
+
+    class Meta:
+        model = Garantias
+        fields = '__all__'
+        widgets = {
+            'facturacion_id_recibo': Select(
+                attrs={
+                    'placeholder': 'Seleccione el recibo',
+                    'class': 'form-control',
+                }
+            ),
+            'cantidad_garantias': Textarea(
+                attrs={
+                    'placeholder': 'Ingrese la cantidad garantías',
+                    'rows': 3,
+                    'cols': 4,
+                }
+            ),
+        }
+
+class productoform(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['modelo_producto'].widget.attrs['autofocus'] = True
+
+    class Meta:
+        model = Producto
+        fields = '__all__'
+        widgets = {
+            'modelo_producto': Select(
+                attrs={
+                    'placeholder': 'Seleccione el modelo',
+                    'class': 'form-control',
+                }
+            ),
+            'cantidad_producto': Textarea(
+                attrs={
+                    'placeholder': 'Ingrese la cantidad producto',
+                    'rows': 3,
+                    'cols': 4,
+                }
+            ),
+        }
+
+class marcaform(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['modelo_marca'].widget.attrs['autofocus'] = True
+
+    class Meta:
+        model = Marca
+        fields = '__all__'
+        widgets = {
+            'modelo_marca': Select(
+                attrs={
+                    'placeholder': 'Seleccione el modelo',
+                    'class': 'form-control',
+                }
+            ),
+            'cantidad_marca': Textarea(
+                attrs={
+                    'placeholder': 'Ingrese la cantidad de marcas',
+                    'rows': 3,
+                    'cols': 4,
+                }
+            ),
+        }        

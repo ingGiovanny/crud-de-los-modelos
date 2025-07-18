@@ -204,3 +204,183 @@ class ventasDeleteView(DeleteView):
         context['entidad'] = 'ventas'
         context['listar_url'] = reverse_lazy('apl:ventas_listar')
         return context   
+
+#--------------------------------------------------------------------------------------------------------------
+#aqui estan las vistas de garantia
+
+class garantiasListview(ListView):
+    model = Garantias
+    template_name = 'garantia/listar_garantia.html'
+    context_object_name = 'garantias'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        nombre = {'nombre': 'sofia'}
+        return JsonResponse(nombre)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Lista de Garantías'
+        context['crear_ruta_url'] = reverse_lazy('apl:garantia_crear')
+        context['entidad'] = 'garantías'
+        context['garantias'] = Garantias.objects.all()
+        return context
+    
+class garantiasCreateView(CreateView):
+    model = Garantias
+    form_class = garantiasform
+    template_name = 'garantia/crear.html'
+    success_url = reverse_lazy('apl:garantia_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Crear garantías'
+        return context
+    
+class garantiasUpdateView(UpdateView):
+    model = Garantias
+    form_class = garantiasform
+    template_name = 'garantia/crear.html'
+    success_url = reverse_lazy('apl:garantia_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Editar garantías'
+        context['entidad'] = 'garantías'
+        context['listar_url'] = reverse_lazy('apl:garantia_listar')
+        return context    
+    
+class garantiasDeleteView(DeleteView):
+    model = Garantias
+    template_name = 'garantia/eliminar.html'
+    success_url = reverse_lazy('apl:garantia_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Eliminar garantías'
+        context['entidad'] = 'garantías'
+        context['listar_url'] = reverse_lazy('apl:garantia_listar')
+        return context
+    
+#--------------------------------------------------------------------------------------------------------------    
+# aqui estan las vistas de productos
+
+class productoListview(ListView):
+    model = Producto
+    template_name = 'producto/listar_productos.html'
+    context_object_name = 'producto'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        nombre = {'nombre': 'sofia'}
+        return JsonResponse(nombre)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Lista de Producto'
+        context['crear_ruta_url'] = reverse_lazy('apl:producto_crear')
+        context['entidad'] = 'producto'
+        context['producto'] = Producto.objects.all()
+        return context
+    
+class productoCreateView(CreateView):
+    model = Producto
+    form_class = productoform
+    template_name = 'producto/crear.html'
+    success_url = reverse_lazy('apl:producto_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Crear producto'
+        return context
+
+class productoUpdateView(UpdateView):
+    model = Producto
+    form_class = productoform
+    template_name = 'producto/crear.html'
+    success_url = reverse_lazy('apl:producto_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Editar producto'
+        context['entidad'] = 'producto'
+        context['listar_url'] = reverse_lazy('apl:producto_listar')
+        return context
+
+class productoDeleteView(DeleteView):
+    model = Producto
+    template_name = 'producto/eliminar.html'
+    success_url = reverse_lazy('apl:producto_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Eliminar producto'
+        context['entidad'] = 'producto'
+        context['listar_url'] = reverse_lazy('apl:producto_listar')
+        return context
+    
+#--------------------------------------------------------------------------------------------------------------    
+# aqui estan las vistas de marca
+
+class marcaListview(ListView):
+    model = Marca
+    template_name = 'marca/listar_marca.html'
+    context_object_name = 'marcas'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        nombre = {'nombre': 'sofia'}
+        return JsonResponse(nombre)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Lista de marcas'
+        context['crear_ruta_url'] = reverse_lazy('apl:marca_crear')
+        context['entidad'] = 'marcas'
+        context['marcas'] = Marca.objects.all()
+        return context
+    
+class marcaCreateView(CreateView):
+    model = Marca
+    form_class = marcaform
+    template_name = 'marca/crear.html'
+    success_url = reverse_lazy('apl:marca_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Crear marcas'
+        return context
+
+class marcaUpdateView(UpdateView):
+    model = Marca
+    form_class = marcaform
+    template_name = 'marca/crear.html'
+    success_url = reverse_lazy('apl:marca_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Editar marcas'
+        context['entidad'] = 'marcas'
+        context['listar_url'] = reverse_lazy('apl:marca_listar')
+        return context
+
+class marcaDeleteView(DeleteView):
+    model = Marca
+    template_name = 'marca/eliminar.html'
+    success_url = reverse_lazy('apl:marca_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Eliminar marcas'
+        context['entidad'] = 'marcas'
+        context['listar_url'] = reverse_lazy('apl:marca_listar')
+        return context
