@@ -2,10 +2,9 @@
 # -------------------------
 # Python
 # -------------------------
-_pycache_/
-*.py[cod]
-*.pyc
-*.pyd
-*.so
 *.sqlite3
-db.sqlite3
+*.pyc
+__pycache__/
+.venv/
+env/
+
