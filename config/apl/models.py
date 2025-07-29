@@ -72,21 +72,37 @@ class Proveedor(models.Model):
     cedula = models.CharField(max_length=50)
     direccion = models.CharField(max_length=50)
     telefono = models.CharField(max_length=50)
-
-class ServicioTecnico(models.Model):
-    id_servicio_tecnico = models.AutoField(primary_key=True)
-    cliente_id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_id_cliente', blank=True, null=True)
-    tecnicos_id_tecnico = models.ForeignKey('Tecnicos', models.DO_NOTHING, db_column='tecnicos_id_tecnico', blank=True, null=True)
-    orden_servicio_id_orden_servicio = models.ForeignKey(Orden_servicio, models.DO_NOTHING, db_column='orden_servicio_id_ordenServicio', blank=True, null=True)
-
+    
 class Tecnicos(models.Model):
     id_tecnico = models.AutoField(primary_key=True)
     nombre_completo = models.CharField(max_length=50)
     n_documento = models.IntegerField()
+    numero_telefonico = models.CharField(max_length=20, blank=True, null=True)
     correo = models.CharField(max_length=60, blank=True, null=True)
     direccion = models.CharField(max_length=40, blank=True, null=True)
-    especialidad = models.CharField(max_length=40, blank=True, null=True)
     tipo_tecnico = models.CharField(max_length=40, blank=True, null=True)
+
+    def __str__(self):
+        return self.nombre_completo
+
+
+class ServicioTecnico(models.Model):
+    id_servicio_tecnico = models.AutoField(primary_key=True)
+    cliente_id_cliente = models.ForeignKey('Cliente', on_delete=models.DO_NOTHING, db_column='cliente_id_cliente')
+    tecnicos_id_tecnico = models.ForeignKey('Tecnicos', on_delete=models.DO_NOTHING, blank=True, null=True)
+    orden_servicio_id_orden_servicio = models.ForeignKey('Orden_servicio', on_delete=models.DO_NOTHING, blank=True, null=True)
+    nombre_cliente_registro = models.CharField(max_length=255, blank=True, null=True)
+    telefono_cliente_registro = models.CharField(max_length=20, blank=True, null=True)
+    correo_cliente_registro = models.EmailField(blank=True, null=True)
+    nombre_tecnico_asignado_registro = models.CharField(max_length=255, blank=True, null=True)
+    telefono_tecnico_asignado_registro = models.CharField(max_length=20, blank=True, null=True)
+    numero_orden_registro = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.nombre_cliente_registro or self.cliente_id_cliente}"
+
+
+
 
 class Ventas(models.Model):
     id_venta = models.AutoField(primary_key=True)

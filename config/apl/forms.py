@@ -1,5 +1,10 @@
 from django.forms import *
 from .models import *
+from django import forms
+from django import forms
+from apl.models import ServicioTecnico
+from .models import *
+
 
 class AdministradorForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -26,7 +31,46 @@ class AdministradorForm(ModelForm):
                 }
             ),
         }
-        
+# apl/forms.py
+
+
+
+class TecnicoForm(forms.ModelForm):
+    class Meta:
+        model = Tecnicos
+        fields = '__all__'
+        widgets = {
+            'nombre_completo': forms.TextInput(attrs={'class': 'form-control'}),
+            'n_documento': forms.TextInput(attrs={'class': 'form-control'}),
+            'numero_telefonico': forms.TextInput(attrs={'class': 'form-control'}),
+            'correo': forms.EmailInput(attrs={'class': 'form-control'}),
+            'direccion': forms.TextInput(attrs={'class': 'form-control'}),
+            'tipo_tecnico': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+
+
+
+
+class ServicioTecnicoForm(forms.ModelForm):
+    class Meta:
+        model = ServicioTecnico
+        fields = '__all__'
+        widgets = {
+            'cliente_id_cliente': forms.Select(attrs={'class': 'form-control'}),
+            'tecnicos_id_tecnico': forms.Select(attrs={'class': 'form-control'}),
+            'orden_servicio_id_orden_servicio': forms.Select(attrs={'class': 'form-control'}),
+            'nombre_cliente_registro': forms.TextInput(attrs={'class': 'form-control'}),
+            'telefono_cliente_registro': forms.TextInput(attrs={'class': 'form-control'}),
+            'correo_cliente_registro': forms.EmailInput(attrs={'class': 'form-control'}),
+            'nombre_tecnico_asignado_registro': forms.TextInput(attrs={'class': 'form-control'}),
+            'telefono_tecnico_asignado_registro': forms.TextInput(attrs={'class': 'form-control'}),
+            'numero_orden_registro': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+
+
+
         
 class Facturacionform(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -51,32 +95,6 @@ class Facturacionform(ModelForm):
             ),
         }
         
-
-class ventasform(ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['valor_venta'].widget.attrs['autofocus'] = True
-
-    class Meta:
-        model = Ventas
-        fields = '__all__'
-        widgets = {
-            'cliente_id_cliente': Select(
-                attrs={
-                    'placeholder': 'Seleccione el cliente',
-                    'class': 'form-control',
-                }
-            ),
-            'cantidad_vendidas': Textarea(
-                attrs={
-                    'placeholder': 'Ingrese la cantidad vendida',
-                    'rows': 3,
-                    'cols': 4,
-                }
-            ),
-        }
-
-
 class ventasform(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -148,6 +166,9 @@ class productoform(ModelForm):
                 }
             ),
         }
+        
+    
+    
 
 class marcaform(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -158,3 +179,26 @@ class marcaform(ModelForm):
     class Meta:
         model = Marca
         fields = '__all__'
+        widgets = {
+            'color': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese el color',
+                    'class': 'form-control',
+                }
+            ),
+            'marca': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese la marca',
+                    'class': 'form-control',
+                }
+            ),
+            'descripcion': Textarea(
+                attrs={
+                    'placeholder': 'Ingrese una descripción',
+                    'rows': 3,
+                    'cols': 40,
+                }
+            ),
+        }
+        
+    
