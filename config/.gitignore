@@ -2,9 +2,23 @@
 # -------------------------
 # Python
 # -------------------------
+<<<<<<< HEAD
 *.sqlite3
 *.pyc
 __pycache__/
 .venv/
 env/
+=======
+# Ignorar archivos compilados de Python
+*.pyc
+__pycache__/
+
+# Ignorar archivos de base de datos
+*.sqlite3
+db.sqlite3
+
+# Ignorar otros archivos temporales o de entorno, si quieres
+*.env
+*.log
+>>>>>>> 929d21c (Commit Modulos Jorge)
 
